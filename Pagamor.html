@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video y Música</title>
+    <style>
+        /* Elimina márgenes y padding para que el video ocupe el espacio correctamente */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0A0A0A; /* Fondo negro intenso */
+        }
+
+        /* Contenedor del video centrado */
+        .video-container {
+            position: relative;
+            width: 95vw;  /* 95% del ancho de la pantalla */
+            height: 95vw; /* 95% del alto de la pantalla, se mantiene cuadrado */
+            max-height: 95vh; /* Limitar la altura máxima al 95% de la altura de la ventana */
+            max-width: 95vh; /* Limitar el ancho máximo al 95% de la altura de la ventana para mantener la proporción */
+            overflow: hidden;
+            border-radius: 10px; /* Bordes redondeados */
+            border: 10px solid #8B0000; /* Bordes de color sangre */
+            box-shadow: 0 0 15px #8B0000; /* Sombra sangrienta */
+        }
+
+        /* Estilo para el video dentro del contenedor */
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que el video cubra el área sin distorsionarse */
+        }
+
+        /* Contenido sobre el video */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centra el contenido dentro del contenedor */
+            z-index: 1; /* Asegura que el contenido esté por encima del video */
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia para mejorar la visibilidad */
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* Animación de las letras bailando */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Animación de las letras con movimiento suave */
+        @keyframes slowBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Animación más rápida de las letras sangrientas */
+        @keyframes fastShake {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-8px);
+            }
+            50% {
+                transform: translateX(8px);
+            }
+            75% {
+                transform: translateX(-8px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Estilo para los textos con animación */
+        h1, h2, h3, h4 {
+            font-size: 2em;
+            margin: 0;
+            opacity: 0; /* Inicialmente oculto */
+            animation: fadeIn 12s ease-out forwards; /* Aumento del tiempo de animación a 12 segundos */
+        }
+
+        /* Animación de desvanecimiento */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .vibrant-text {
+            color: red;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .bloody-text {
+            color: #8B0000; /* Color sangriento */
+            animation: fastShake 1s ease-in-out infinite;
+        }
+
+        /* Estilo para los botones */
+        .play-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FF70A6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        .play-button:hover {
+            background-color: #d95973;
+        }
+
+        /* Estilo para las caritas flotantes */
+        .floating-emojis {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .emoji {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Animación para las caritas */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animación para los textos adicionales */
+        .text-delay {
+            animation: fadeIn 15s ease-out forwards; /* Aumento del tiempo de animación */
+            opacity: 0;
+        }
+
+        .text-delay-1 {
+            animation-delay: 1s; /* Pequeño delay para la primera frase */
+        }
+
+        .text-delay-2 {
+            animation-delay: 13s; /* Para la segunda frase */
+        }
+
+        .text-delay-3 {
+            animation-delay: 25s; /* Para la tercera frase */
+        }
+
+        .text-delay-4 {
+            animation-delay: 37s; /* Para la cuarta frase (felices fiestas) */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del video centrado -->
+    <div class="video-container">
+        <video id="background-video" preload="auto">
+            <source src="nuevo.mp4" type="video/mp4">
+            Tu navegador no soporta el formato de video.
+        </video>
+
+        <!-- Contenido sobre el video -->
+        <div class="content">
+            <h1 class="text-delay text-delay-1">El mejor descanso nocturno del mundo es en el que dejas de soñar</h1>
+            <h2 class="vibrant-text text-delay text-delay-2">Porque soñar destruye la realidad</h2>
+            <h3 class="bloody-text text-delay text-delay-3">Y qué mejor realidad la que te espera</h3>
+            <h4 class="text-delay text-delay-4">Felices fiestas :)</h4>
+            <button class="play-button" id="playButton" onclick="playMedia()">Click ahora o miedo? >:v</button>
+        </div>
+    </div>
+
+    <!-- Música en segundo plano -->
+    <audio id="audio" loop>
+        <source src="dbz.mp3" type="audio/mp3">
+        Tu navegador no soporta el formato de audio.
+    </audio>
+
+    <!-- Caritas flotantes -->
+    <div class="floating-emojis">
+        <img src="❤️.png" class="emoji" style="top: 30%; left: 20%;">
+        <img src="❤️.png" class="emoji" style="top: 50%; left: 60%;">
+        <img src="❤️.png" class="emoji" style="top: 70%; left: 40%;">
+        <img src="❤️.png" class="emoji" style="top: 20%; left: 80%;">
+    </div>
+
+    <script>
+        // Función para reproducir tanto el video como la música
+        function playMedia() {
+            var audio = document.getElementById('audio');
+            var video = document.getElementById('background-video');
+
+            // Reproducir video y música al mismo tiempo
+            audio.play(); // Reproduce la música
+            video.play(); // Reproduce el video
+
+            // Cambiar el texto del primer botón
+            document.getElementById('playButton').textContent = "Soñar en bueno :)!";
+
+            // Sincronizar la música con el final del video
+            var videoDuration = video.duration;
+            setTimeout(function() {
+                audio.pause(); // Detener la música 2 segundos antes de que termine el video
+            }, (videoDuration - 4) * 1000); // 4 segundos antes de que termine el video
+
+            video.onended = function() {
+                // Asegurarse de que la música se detenga al final del video si no se ha detenido ya
+                audio.pause();
+            };
+        }
+    </script>
+
+</body>
+</html>
