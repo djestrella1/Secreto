@@ -19,10 +19,10 @@
         /* Contenedor del video centrado */
         .video-container {
             position: relative;
-            width: 95vw;  /* 95% del ancho de la pantalla */
-            height: 95vw; /* 95% del alto de la pantalla, se mantiene cuadrado */
-            max-height: 95vh; /* Limitar la altura máxima al 95% de la altura de la ventana */
-            max-width: 95vh; /* Limitar el ancho máximo al 95% de la altura de la ventana para mantener la proporción */
+            width: 90vw;  /* 90% del ancho de la pantalla */
+            height: 90vw; /* 90% del alto de la pantalla, se mantiene cuadrado */
+            max-height: 90vh; /* Limitar la altura máxima al 90% de la altura de la ventana */
+            max-width: 90vh; /* Limitar el ancho máximo al 90% de la altura de la ventana para mantener la proporción */
             overflow: hidden;
             border-radius: 10px; /* Bordes redondeados */
             border: 10px solid #8B0000; /* Bordes de color sangre */
@@ -51,6 +51,7 @@
             background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia para mejorar la visibilidad */
             padding: 10px;
             border-radius: 10px;
+            width: 80%; /* Reduce el tamaño en pantallas pequeñas */
         }
 
         /* Animación de las letras bailando */
@@ -60,16 +61,6 @@
             }
             50% {
                 transform: translateY(-10px);
-            }
-        }
-
-        /* Animación de las letras con movimiento suave */
-        @keyframes slowBounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
             }
         }
 
@@ -94,7 +85,7 @@
 
         /* Estilo para los textos con animación */
         h1, h2, h3, h4 {
-            font-size: 2em;
+            font-size: 1.5em;
             margin: 0;
             opacity: 0; /* Inicialmente oculto */
             animation: fadeIn 12s ease-out forwards; /* Aumento del tiempo de animación a 12 segundos */
@@ -186,6 +177,35 @@
         .text-delay-4 {
             animation-delay: 37s; /* Para la cuarta frase (felices fiestas) */
         }
+
+        /* Media queries para mejorar la visualización en dispositivos móviles */
+        @media (max-width: 768px) {
+            .video-container {
+                width: 100vw;
+                height: 100vw;
+                max-height: 90vh;
+                max-width: 90vh;
+            }
+            h1, h2, h3, h4 {
+                font-size: 1.2em; /* Reducir el tamaño de los textos en pantallas pequeñas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                width: 90%; /* Mayor tamaño en pantallas muy pequeñas */
+            }
+            .video-container {
+                width: 100vw;
+                height: 100vw;
+                max-height: 90vh;
+                max-width: 90vh;
+            }
+            .play-button {
+                font-size: 1em; /* Reducir tamaño del botón */
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -226,26 +246,14 @@
         function playMedia() {
             var audio = document.getElementById('audio');
             var video = document.getElementById('background-video');
+            var playButton = document.getElementById('playButton');
 
-            // Reproducir video y música al mismo tiempo
-            audio.play(); // Reproduce la música
-            video.play(); // Reproduce el video
-
-            // Cambiar el texto del primer botón
-            document.getElementById('playButton').textContent = "Soñar en bueno :)!";
-
-            // Sincronizar la música con el final del video
-            var videoDuration = video.duration;
-            setTimeout(function() {
-                audio.pause(); // Detener la música 2 segundos antes de que termine el video
-            }, (videoDuration - 4) * 1000); // 4 segundos antes de que termine el video
-
-            video.onended = function() {
-                // Asegurarse de que la música se detenga al final del video si no se ha detenido ya
-                audio.pause();
-            };
+            if (audio.paused && video.paused) {
+                audio.play();
+                video.play();
+                playButton.textContent = "¡Ya está sonando!";
+            }
         }
     </script>
-
 </body>
 </html>
