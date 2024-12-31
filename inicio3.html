@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio3</title>
     <style>
+        /* Estilo general para el body */
         body {
             background-color: #3d3d3d; /* Fondo gris oscuro */
             color: white;
@@ -13,7 +14,15 @@
             padding: 50px;
             background-image: linear-gradient(45deg, rgba(255, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
             background-size: cover;
+            margin: 0; /* Elimina márgenes predeterminados */
+            height: 100vh; /* Hace que el body ocupe toda la altura de la pantalla */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
+
+        /* Animación de parpadeo */
         .parpadeo {
             color: #000000;
             font-size: 2.5em;
@@ -21,17 +30,22 @@
             animation: parpadeo 1s infinite step-start;
             text-shadow: 2px 2px 5px red, 0 0 25px yellow, 0 0 5px darkred; /* Efecto sangriento */
         }
+
         @keyframes parpadeo {
             50% {
                 visibility: hidden;
             }
         }
+
+        /* Estilo para el h1 */
         h1 {
             font-size: 3em;
             color: #f2f2f2;
             margin-bottom: 30px;
             text-shadow: 1px 1px 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000; /* Sombras rojas */
         }
+
+        /* Estilo para el botón */
         .action-button {
             font-size: 1.5em;
             color: white;
@@ -42,11 +56,52 @@
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            margin-top: 20px;
         }
 
         .action-button:hover {
             background-color: #d95973;
             transform: scale(1.1);
+        }
+
+        /* Estilo para el h2 */
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+
+        /* Media queries para mejorar la visualización en dispositivos móviles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em; /* Reducir el tamaño del título en pantallas más pequeñas */
+            }
+            .parpadeo {
+                font-size: 2em; /* Reducir el tamaño de la animación de parpadeo */
+            }
+            .action-button {
+                font-size: 1.2em; /* Reducir el tamaño del botón */
+                padding: 12px 25px;
+            }
+            h2 {
+                font-size: 1.5em; /* Reducir el tamaño del texto en pantallas pequeñas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em; /* Reducir aún más el tamaño en pantallas muy pequeñas */
+            }
+            .parpadeo {
+                font-size: 1.5em; /* Reducir aún más el tamaño de la animación */
+            }
+            .action-button {
+                font-size: 1em; /* Reducir tamaño del botón */
+                padding: 10px 20px;
+            }
+            h2 {
+                font-size: 1.2em; /* Reducir tamaño del texto */
+            }
         }
     </style>
 </head>
